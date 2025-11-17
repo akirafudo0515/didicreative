@@ -1,0 +1,54 @@
+==========================================
+OGL 庫下載步驟（最簡單方法）
+==========================================
+
+✅ 步驟 1：資料夾已創建完成
+   位置：js/lib/ogl/core/ 和 js/lib/ogl/extras/
+
+📥 步驟 2：下載以下 4 個檔案
+
+   請在瀏覽器中打開以下連結，然後：
+   1. 右鍵點擊頁面
+   2. 選擇「另存新檔」或「Save As」
+   3. 儲存到對應的資料夾
+
+   檔案 1 - Renderer.js
+   URL: https://raw.githubusercontent.com/oframe/ogl/master/src/core/Renderer.js
+   儲存到：js/lib/ogl/core/Renderer.js
+
+   檔案 2 - Program.js
+   URL: https://raw.githubusercontent.com/oframe/ogl/master/src/core/Program.js
+   儲存到：js/lib/ogl/core/Program.js
+
+   檔案 3 - Mesh.js
+   URL: https://raw.githubusercontent.com/oframe/ogl/master/src/core/Mesh.js
+   儲存到：js/lib/ogl/core/Mesh.js
+
+   檔案 4 - Triangle.js
+   URL: https://raw.githubusercontent.com/oframe/ogl/master/src/extras/Triangle.js
+   儲存到：js/lib/ogl/extras/Triangle.js
+
+✏️ 步驟 3：修改 index.html
+
+   將第 11 行的 CDN 連結：
+   <script src="https://unpkg.com/ogl@0.0.89/src/index.js" defer></script>
+
+   改為本地檔案：
+   <script src="js/lib/ogl/core/Renderer.js"></script>
+   <script src="js/lib/ogl/core/Program.js"></script>
+   <script src="js/lib/ogl/core/Mesh.js"></script>
+   <script src="js/lib/ogl/extras/Triangle.js"></script>
+
+✅ 完成！刷新頁面即可看到效果
+
+==========================================
+
+
+
+
+
+
+
+
+
+

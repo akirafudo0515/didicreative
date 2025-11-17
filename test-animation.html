@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動畫測試</title>
+    <style>
+        :root {
+            --gold1: #f7e7a7;
+            --bronze: #a67c52;
+        }
+        
+        body {
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .test-text {
+            font-size: 80px;
+            font-weight: bold;
+            background: linear-gradient(
+                120deg,
+                #a67c52 0%,
+                #a67c52 25%,
+                #d4b56a 32%,
+                #f7e7a7 38%,
+                rgba(255, 255, 255, 0.2) 42%,
+                #ffffff 46%,
+                #ffffff 54%,
+                rgba(255, 255, 255, 0.2) 58%,
+                #f7e7a7 62%,
+                #d4b56a 68%,
+                #a67c52 75%,
+                #a67c52 100%
+            );
+            background-size: 300% 100%;
+            background-repeat: no-repeat;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shine-test 3s linear infinite;
+            will-change: background-position;
+        }
+        
+        @keyframes shine-test {
+            0% {
+                background-position: 200% 50%;
+            }
+            100% {
+                background-position: -200% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-text">新媒體領航者</div>
+    <script>
+        // 檢查動畫是否執行
+        const testEl = document.querySelector('.test-text');
+        const style = window.getComputedStyle(testEl);
+        console.log('動畫名稱:', style.animationName);
+        console.log('動畫持續時間:', style.animationDuration);
+        console.log('動畫狀態:', style.animationPlayState);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

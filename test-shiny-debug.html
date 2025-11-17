@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiny 動畫調試</title>
+    <style>
+        :root {
+            --hero-small-size: 60px;
+            --hero-big-size: 96px;
+            --hero-anim: 2s;
+        }
+        
+        body {
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .title {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 10px;
+            line-height: 1;
+        }
+        
+        .title .small, .title .big {
+            font-family: Arial, sans-serif;
+        }
+        
+        .title .small.shiny-text {
+            font-size: var(--hero-small-size);
+        }
+        
+        .title .big.shiny-text {
+            font-size: var(--hero-big-size);
+            transform: translateY(12px);
+        }
+        
+        /* 完全複製主頁面的 shiny-text 樣式 */
+        .title .shiny-text {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(
+                120deg,
+                #d0d0d0 0%,
+                #d0d0d0 25%,
+                #e0e0e0 32%,
+                #f0f0f0 38%,
+                rgba(255, 255, 255, 0.3) 42%,
+                #ffffff 46%,
+                #ffffff 54%,
+                rgba(255, 255, 255, 0.3) 58%,
+                #f0f0f0 62%,
+                #e0e0e0 68%,
+                #d0d0d0 75%,
+                #d0d0d0 100%
+            ) !important;
+            background-size: 300% 100% !important;
+            background-repeat: no-repeat !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            color: transparent !important;
+            animation: shine-left 3s linear infinite !important;
+            will-change: background-position !important;
+            animation-play-state: running !important;
+        }
+        
+        .title .small.shiny-text {
+            animation: shine-left 3s linear infinite !important;
+            animation-play-state: running !important;
+        }
+        
+        .title .big.shiny-text {
+            animation: shine-right 3s linear infinite 1.5s !important;
+            animation-play-state: running !important;
+        }
+        
+        @keyframes shine-left {
+            0% {
+                background-position: 200% 50%;
+            }
+            100% {
+                background-position: -200% 50%;
+            }
+        }
+        
+        @keyframes shine-right {
+            0% {
+                background-position: 200% 50%;
+            }
+            100% {
+                background-position: -200% 50%;
+            }
+        }
+        
+        /* 模擬 reveal 機制 */
+        .hero .title .small.shiny-text, .hero .title .big.shiny-text {
+            opacity: 1; /* 改成可見，方便測試 */
+            transform: translateY(0) scale(1);
+            animation: shine-left 3s linear infinite !important;
+            animation-play-state: running !important;
+        }
+        
+        .hero .title .big.shiny-text {
+            animation: shine-right 3s linear infinite 1.5s !important;
+            animation-play-state: running !important;
+        }
+        
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 10px;
+            font-size: 12px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-info" id="debug"></div>
+    
+    <section class="hero">
+        <h1 class="title">
+            <span class="small shiny-text" data-text="新媒體">新媒體</span>
+            <span class="big shiny-text" data-text="領航者">領航者</span>
+        </h1>
+    </section>
+    
+    <script>
+        // 檢查動畫狀態
+        function checkAnimation() {
+            const small = document.querySelector('.small.shiny-text');
+            const big = document.querySelector('.big.shiny-text');
+            const debug = document.getElementById('debug');
+            
+            if (small && big) {
+                const smallStyle = window.getComputedStyle(small);
+                const bigStyle = window.getComputedStyle(big);
+                
+                const info = `
+動畫檢查：
+小字 - 動畫名稱: ${smallStyle.animationName}
+小字 - 動畫狀態: ${smallStyle.animationPlayState}
+小字 - 背景位置: ${smallStyle.backgroundPosition}
+大字 - 動畫名稱: ${bigStyle.animationName}
+大字 - 動畫狀態: ${bigStyle.animationPlayState}
+大字 - 背景位置: ${bigStyle.backgroundPosition}
+                `;
+                debug.textContent = info;
+            }
+        }
+        
+        checkAnimation();
+        setInterval(checkAnimation, 1000);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
