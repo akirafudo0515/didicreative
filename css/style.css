@@ -1394,6 +1394,11 @@ main {
 .members .grid-members{ display: grid; gap: 10px; grid-template-columns: repeat(2,1fr); } /* 手機版間距縮小 */
 .member{
     text-align: center; color: var(--bronze); font-size: 1.8rem; font-family: 'A';
+    min-width: 0; /* 防止grid項目被壓縮 */
+    width: 100%; /* 確保佔滿grid單元 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 /* 確保 CEO 卡片與成員完全一致 */
 .member-ceo {
@@ -1416,9 +1421,26 @@ main {
     border-radius: 50%;
     box-shadow: 0 10px 28px rgba(0,0,0,.12);
 }
-.member figcaption{ margin-top: 4px; line-height: 1.25; } /* 再縮小間距 */
-.member figcaption > div{ font-size: 0.8em; opacity: 0.8; } /* 再縮小字體 */
-.member figcaption strong{ display: block; margin-top: 2px; font-size: 1.05em; } /* 再縮小間距和字體 */
+.member figcaption{ 
+    margin-top: 4px; 
+    line-height: 1.25; 
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+} /* 再縮小間距 */
+.member figcaption > div{ 
+    font-size: 0.8em; 
+    opacity: 0.8; 
+    white-space: normal;
+    word-wrap: break-word;
+} /* 再縮小字體 */
+.member figcaption strong{ 
+    display: block; 
+    margin-top: 2px; 
+    font-size: 1.05em; 
+    white-space: normal;
+    word-wrap: break-word;
+} /* 再縮小間距和字體 */
 .member-desc{
     margin-top: 6px; /* 再縮小間距（從8px到6px） */
     font-size: 0.75rem; /* 再縮小約5px（從0.79rem約12.6px縮小到0.75rem約12px） */
@@ -1436,24 +1458,48 @@ main {
 @media (max-width: 899px) {
     .members .grid-members {
         gap: 16px; /* 增加間距，避免卡片太擠 */
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 確保兩欄等寬，不會被壓縮 */
+    }
+    .member {
+        min-width: 0; /* 防止被壓縮 */
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 0 4px; /* 增加內邊距 */
     }
     .member img {
-        max-width: 180px; /* 手機版保持適當大小，不要太小 */
+        max-width: 160px; /* 手機版統一大小 */
         width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+        object-fit: cover;
     }
     .member figcaption {
         font-size: 1.5rem; /* 保持適當的字體大小 */
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .member figcaption > div {
-        font-size: 0.85em; /* 稍微增大職稱字體 */
+        font-size: 0.9em; /* 稍微增大職稱字體 */
+        white-space: normal;
+        word-wrap: break-word;
     }
     .member figcaption strong {
-        font-size: 1.1em; /* 稍微增大姓名字體 */
+        font-size: 1.15em; /* 稍微增大姓名字體 */
+        white-space: normal;
+        word-wrap: break-word;
     }
     .member-desc {
-        font-size: 0.85rem; /* 稍微增大描述字體，避免太小 */
+        font-size: 0.9rem; /* 稍微增大描述字體，避免太小 */
         line-height: 1.7;
-        padding: 0 4px; /* 增加左右邊距，避免文字貼邊 */
+        padding: 0 2px; /* 減少左右邊距，讓文字有更多空間 */
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        white-space: normal;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 }
 
