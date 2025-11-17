@@ -67,18 +67,26 @@ body{
     height: 100vh;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
+    margin: 0;
+    padding: 0;
 }
 
 .balatro-container canvas {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
     display: block !important;
     width: 100vw !important;
     height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
     object-fit: cover;
@@ -1135,6 +1143,15 @@ main {
     color: var(--bronze);     /* 咖啡金色 */
 }
 
+/* 手機版：縮小核心目標說明文字 */
+@media (max-width: 768px) {
+    .lead {
+        font-size: 14px;       /* 手機版縮小字體 */
+        line-height: 1.6;
+        padding: 0 16px;       /* 增加左右邊距 */
+    }
+}
+
 /* =========================
    輪播（Carousel）
    可調整：每列顯示數量、gap、箭頭大小與位置
@@ -1415,6 +1432,31 @@ main {
     word-wrap: break-word; /* 允許長單詞換行 */
 }
 
+/* 手機版：修復團隊卡片右邊的人被縮小的問題 */
+@media (max-width: 899px) {
+    .members .grid-members {
+        gap: 16px; /* 增加間距，避免卡片太擠 */
+    }
+    .member img {
+        max-width: 180px; /* 手機版保持適當大小，不要太小 */
+        width: 100%;
+    }
+    .member figcaption {
+        font-size: 1.5rem; /* 保持適當的字體大小 */
+    }
+    .member figcaption > div {
+        font-size: 0.85em; /* 稍微增大職稱字體 */
+    }
+    .member figcaption strong {
+        font-size: 1.1em; /* 稍微增大姓名字體 */
+    }
+    .member-desc {
+        font-size: 0.85rem; /* 稍微增大描述字體，避免太小 */
+        line-height: 1.7;
+        padding: 0 4px; /* 增加左右邊距，避免文字貼邊 */
+    }
+}
+
 /* 個人 IP 輪廓使用輪播樣式，已改為 carousel 結構，此處樣式已移除 */
 
 /* 第一排：CEO + 個人 IP 輪廓 */
@@ -1426,6 +1468,14 @@ main {
     gap: 16px;
     grid-template-columns: 1fr; /* 手機版單欄 */
     margin-top: -20px; /* 往上移動，減少與上面的距離 */
+}
+
+/* 手機版：調整個人 IP 輪廓位置，更靠近 DIDI */
+@media (max-width: 899px) {
+    .team-first-row {
+        gap: 8px; /* 縮小間距 */
+        margin-top: -10px; /* 減少負margin，讓IP輪廓更靠近DIDI */
+    }
 }
 
 /* 電腦版：第一排 CEO + IP 輪廓，CEO 與成員對齊 */
@@ -1705,57 +1755,37 @@ main {
 }
 
 /* =========================
-   浮動按鈕（Line + 回頂）
+   浮動按鈕（Line + 回頂）- 已隱藏
 ========================= */
 .fab {
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    border: 0;
-    cursor: pointer;
-    background: linear-gradient(180deg, var(--gold1), var(--bronze));
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-    transition: all 0.3s ease;
-    overflow: hidden;
-    z-index: 50;
+    display: none !important; /* 隱藏所有浮動按鈕 */
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .fab-fb {
-    bottom: 158px; /* FB 在最上面 */
+    display: none !important;
 }
 
 .fab-ig {
-    bottom: 86px; /* IG 在中間 */
+    display: none !important;
 }
 
 .fab-line {
-    bottom: 16px; /* LINE 在最下面 */
+    display: none !important;
 }
 
 .fab img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover; /* 改為cover，確保圓形顯示 */
-    border-radius: 50%; /* 切成圓形 */
-    pointer-events: none;
-    filter: drop-shadow(0 0 6px rgba(255, 220, 140, 0.4));
-    transition: filter 0.3s ease;
+    display: none !important;
 }
 
 .fab:hover {
-    box-shadow: 0 0 25px rgba(255, 230, 150, 0.9), 0 0 45px rgba(255, 210, 120, 0.7);
-    transform: translateY(-3px);
+    display: none !important;
 }
 
 .fab:hover img {
-    filter: drop-shadow(0 0 10px rgba(255, 230, 150, 0.8))
-            drop-shadow(0 0 20px rgba(255, 210, 100, 0.6));
-    /* 移除 transform: scale，避免放大時被切到 */
+    display: none !important;
 }
 
 /* =========================
@@ -1765,14 +1795,22 @@ main {
 .lightbox{
     position: fixed; inset: 0; background: rgba(0,0,0,.8);
     display: none; align-items: center; justify-content: center; z-index: 60;
+    padding: 20px; /* 增加內邊距，避免圖片貼邊 */
 }
 .lightbox.open{ display: flex; }
-.lb-img{ max-width: 92vw; max-height: 90vh; }
+.lb-img{ 
+    max-width: 92vw; 
+    max-height: 90vh; 
+    margin: 0 auto; /* 確保圖片居中 */
+    display: block;
+    object-fit: contain; /* 保持圖片比例 */
+}
 .lb-close{
     position: absolute; right: 20px; top: 20px;
     width: 38px; height: 38px; border-radius: 50%; border: 0; cursor: pointer;
     background: linear-gradient(180deg, var(--gold1), var(--bronze));
     box-shadow: 0 6px 18px rgba(0,0,0,.25);
+    z-index: 61; /* 確保按鈕在圖片上方 */
 }
 
 /* =========================
@@ -1945,14 +1983,14 @@ ul, li { list-style: none !important; }
 /* 安全字級：窄寬時自動縮小 */
 @media (max-width: 960px) {
     :root {
-        --hero-small-size: clamp(32px, 20vw, 60px);
+        --hero-small-size: clamp(24px, 15vw, 48px); /* 缩小手机版字体 */
     }
     .title .big:not(.shiny-text) {
         transform: translateY(6px);
     }
     .title .big.shiny-text {
         transform: translateY(6px) !important;
-}
+    }
 }
 
 
