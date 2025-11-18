@@ -1615,6 +1615,18 @@ main {
     margin: 0 auto; /* 置中顯示 */
     box-shadow: 0 10px 30px rgba(0,0,0,.12);
 }
+/* 手機版：減少左右留白 */
+@media (max-width: 980px){
+    .plans{ 
+        padding: 0 8px 40px; /* 減少左右邊距 */
+    }
+    .plans-wrap{ 
+        padding: 0 8px; /* 減少左右邊距 */
+    }
+    .plans-wrap img{
+        width: 95%; /* 增加圖片寬度，減少留白 */
+    }
+}
 @media (min-width: 980px){
     .plans-wrap{ 
         grid-template-columns: repeat(3, 1fr);
@@ -1640,6 +1652,15 @@ main {
     padding: 40px 16px 30px;
     margin-top: 100px; /* 增加與方案介紹的間距 */
     position: relative;
+}
+/* 手機版：減少左右留白 */
+@media (max-width: 768px){
+    .site-footer {
+        padding: 40px 8px 30px; /* 減少左右邊距 */
+    }
+    .footer-content {
+        padding: 0 8px; /* 減少內容區左右邊距 */
+    }
 }
 
 /* 金色發光分隔線 */
@@ -1789,28 +1810,55 @@ main {
 /* 電腦版：頁尾布局調整 */
 @media (min-width: 768px) {
     .footer-content {
-        grid-template-columns: 2fr 1fr; /* 改為兩欄：品牌資訊 | 社群連結 */
+        grid-template-columns: 1fr; /* 單欄布局 */
         text-align: left;
         align-items: start;
+        position: relative;
     }
 
     .footer-brand {
         text-align: left;
+        padding-left: 30px; /* 對齊方案介紹的左邊距 */
+        display: flex;
+        flex-direction: column;
     }
 
     .footer-locations {
         justify-content: flex-start; /* 左對齊 */
         gap: 24px; /* 電腦版增加間距 */
+        margin-bottom: 0; /* 移除底部間距 */
+        display: inline-flex; /* 讓地點可以和其他元素在同一行 */
+    }
+
+    /* 讓社群連結與地點同一行，靠右對齊 */
+    .footer-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* 創建一個包含地點和社群連結的容器 */
+    .footer-brand {
+        position: relative;
     }
 
     .footer-social {
-        justify-content: flex-start;
-        flex-direction: column;
-        gap: 10px; /* 縮小間距（從16px到10px） */
+        position: absolute;
+        right: 30px; /* 靠右對齊 */
+        top: auto;
+        bottom: 12px; /* 對齊地點的垂直位置 */
+        justify-content: flex-end; /* 靠右對齊 */
+        flex-direction: row; /* 橫向排列 */
+        gap: 20px; /* 增加間距 */
+        margin-left: 0;
+        margin-top: 0;
+        display: flex;
+        align-items: center; /* 垂直居中對齊 */
+        padding-left: 0;
+        padding-right: 0;
     }
 
     .social-link {
-        flex-direction: row;
+        flex-direction: row; /* 橫向排列（圖標和文字） */
         text-align: left;
     }
 }
