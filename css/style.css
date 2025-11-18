@@ -1184,6 +1184,13 @@ main {
         max-width: 100%;
     }
 }
+/* 手機版：個人IP輪廓區塊與第一排對齊 */
+@media (max-width: 899px) {
+    #team .case-block.ip-carousel-block {
+        padding: 0; /* 移除 padding，讓它與第一排對齊 */
+        margin: 0;
+    }
+}
 .scroll-stack-scroller .case-block{ margin: 0 auto; }
 .casetitle{ text-align: center; font-family: 'A'; font-size: 24px; margin: 24px 0 10px; color: var(--bronze); }
 
@@ -1359,6 +1366,12 @@ main {
    可調整：頭像大小、文字大小、成員卡片排列
 ========================= */
 .team{ max-width: var(--max); margin: 20px auto; padding: 0 16px; }
+/* 手機版：減少左邊間距，讓內容更靠左對齊 */
+@media (max-width: 899px) {
+    .team {
+        padding: 0 8px 0 4px; /* 左邊更靠左（4px），右邊保持一些間距（8px） */
+    }
+}
 
 .ceo-wrap{ display: grid; grid-template-columns: 1fr; gap: 22px; align-items: center; }
 .ceo-photo img{
@@ -1417,7 +1430,14 @@ main {
 }
 /* 確保 CEO 卡片與成員完全一致 */
 .member-ceo {
-    text-align: center; color: var(--bronze); font-size: 1.8rem; font-family: 'A';
+    text-align: center; 
+    color: var(--bronze); 
+    font-size: 1.8rem; 
+    font-family: 'A';
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 置中對齊 */
+    width: 100%;
 }
 .member img{
     width: 100%; max-width: 210px;      /* 再縮小5px（從215px到210px） */
@@ -1425,16 +1445,15 @@ main {
     border-radius: 50%;
     box-shadow: 0 10px 28px rgba(0,0,0,.12);
 }
-/* 確保 CEO 卡片與成員完全一致 */
-.member-ceo {
-    text-align: center; color: var(--bronze); font-size: 1.8rem; font-family: 'A';
-}
 /* 確保 CEO 圖片與成員圖片完全一致 */
 .member-ceo img{
-    width: 100%; max-width: 210px;      /* 再縮小5px（從215px到210px） */
-    aspect-ratio: 1/1; object-fit: cover;
+    width: 100%; 
+    max-width: 210px;      /* 再縮小5px（從215px到210px） */
+    aspect-ratio: 1/1; 
+    object-fit: cover;
     border-radius: 50%;
     box-shadow: 0 10px 28px rgba(0,0,0,.12);
+    margin: 0 auto; /* 確保圖片置中 */
 }
 .member figcaption{ 
     margin-top: 4px; 
@@ -1534,8 +1553,26 @@ main {
 /* 手機版：調整個人 IP 輪廓位置，更靠近 DIDI */
 @media (max-width: 899px) {
     .team-first-row {
-        gap: 8px; /* 縮小間距 */
+        padding: 0 8px 0 4px; /* 左邊更靠左（4px），右邊保持一些間距（8px） */
+        gap: 4px; /* 大幅縮小間距，讓IP輪廓更靠近DIDI */
         margin-top: -10px; /* 減少負margin，讓IP輪廓更靠近DIDI */
+    }
+    /* 確保蒂蒂置中 */
+    .team-first-row .member-ceo {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 置中對齊 */
+        justify-content: center;
+        width: 100%;
+        margin: 0 auto;
+    }
+    /* 確保個人IP輪廓也置中 */
+    .team-first-row .ip-carousel-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 置中對齊 */
+        width: 100%;
+        margin: 0 auto;
     }
 }
 
@@ -1577,6 +1614,12 @@ main {
     max-width: var(--max);
     margin: 0 auto;
     padding: 0 16px;
+}
+/* 手機版：減少左邊間距，與第一排對齊 */
+@media (max-width: 899px) {
+    .members {
+        padding: 0 8px 0 4px; /* 左邊更靠左（4px），右邊保持一些間距（8px） */
+    }
 }
 @media (min-width: 900px){ 
     .members .grid-members{ 
