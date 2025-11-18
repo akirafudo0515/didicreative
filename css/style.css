@@ -320,6 +320,26 @@ a{ color: inherit; text-decoration: none; } /* 取消預設藍色 */
     background: transparent;
 }
 
+/* 電腦版：調整menu-wrap高度以適應三個方塊 */
+@media (min-width: 769px) {
+    .menu-wrap {
+        height: auto;
+        min-height: 100px; /* 增加高度確保文字不被切 */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible; /* 確保文字不被切 */
+    }
+    
+    .card-nav {
+        overflow: visible; /* 確保導覽列內容不被切 */
+    }
+    
+    .menu.flowing-menu {
+        overflow: visible; /* 確保菜單內容不被切 */
+    }
+}
+
 .card-nav.open .menu-wrap {
     visibility: visible;
     pointer-events: auto;
@@ -336,6 +356,103 @@ a{ color: inherit; text-decoration: none; } /* 取消預設藍色 */
     justify-content: flex-start;
     /* 確保背景正確顯示 */
     background: transparent;
+}
+
+/* 電腦版：三個方塊樣式 - 優雅設計 */
+@media (min-width: 769px) {
+    .menu.flowing-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        padding: 24px 20px; /* 恢復上下間距 */
+        height: auto;
+        width: 100%;
+    }
+    
+    .menu__item {
+        flex: none;
+        position: relative;
+        background: transparent;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        min-height: 60px; /* 增加高度確保文字不被切 */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 32px; /* 增加上下padding確保文字完整 */
+        margin: 0;
+        overflow: visible; /* 確保文字不被切 */
+    }
+    
+    /* 優雅的分隔線 */
+    .menu__item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 30px; /* 縮小分隔線高度以配合更矮的方框 */
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(166, 124, 82, 0.3),
+            transparent
+        );
+    }
+    
+    .menu__item:hover {
+        background: transparent;
+    }
+    
+    .menu__item-link {
+        font-size: 17px;
+        color: var(--bronze);
+        text-transform: none;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        width: auto;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        padding: 6px 0; /* 適中的上下padding */
+        white-space: nowrap;
+        overflow: visible;
+        line-height: 1.6; /* 增加行高確保文字不被切 */
+        box-sizing: border-box;
+    }
+    
+    /* 優雅的底線動畫 */
+    .menu__item-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--gold2), transparent);
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .menu__item:hover .menu__item-link::after {
+        width: 80%;
+    }
+    
+    .menu__item-link:hover {
+        color: var(--gold2);
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
+    }
+    
+    /* 隱藏跑馬燈 */
+    .marquee {
+        display: none !important;
+    }
 }
 
 .menu__item {
@@ -379,6 +496,13 @@ a{ color: inherit; text-decoration: none; } /* 取消預設藍色 */
 
 .menu__item-link:focus:not(:focus-visible) {
     color: var(--bronze); /* 咖啡金色 */
+}
+
+/* 電腦版隱藏跑馬燈 */
+@media (min-width: 769px) {
+    .marquee {
+        display: none !important;
+    }
 }
 
 .marquee {
@@ -1419,14 +1543,26 @@ main {
 }
 
 /* 公司團隊 */
-.members .grid-members{ display: grid; gap: 10px; grid-template-columns: repeat(2,1fr); } /* 手機版間距縮小 */
+.members .grid-members{ 
+    display: grid; 
+    gap: 10px; 
+    grid-template-columns: repeat(2,1fr); 
+    justify-items: center; /* 確保grid項目居中 */
+    width: 100%;
+    max-width: 100%;
+} /* 手機版間距縮小 */
 .member{
-    text-align: center; color: var(--bronze); font-size: 1.8rem; font-family: 'A';
+    text-align: center; 
+    color: var(--bronze); 
+    font-size: 1.8rem; 
+    font-family: 'A';
     min-width: 0; /* 防止grid項目被壓縮 */
     width: 100%; /* 確保佔滿grid單元 */
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-self: center; /* 確保成員卡片居中 */
 }
 /* 確保 CEO 卡片與成員完全一致 */
 .member-ceo {
@@ -1614,11 +1750,23 @@ main {
     max-width: var(--max);
     margin: 0 auto;
     padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-/* 手機版：減少左邊間距，與第一排對齊 */
+/* 手機版：確保內容居中 */
 @media (max-width: 899px) {
     .members {
-        padding: 0 8px 0 4px; /* 左邊更靠左（4px），右邊保持一些間距（8px） */
+        padding: 0 16px; /* 左右對稱，確保居中 */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .members .grid-members {
+        width: 100%;
+        max-width: 100%;
+        justify-items: center;
     }
 }
 @media (min-width: 900px){ 
